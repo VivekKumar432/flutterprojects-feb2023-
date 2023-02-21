@@ -206,11 +206,16 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Spacer(),
-                    PlaylistIconButtons(Icons.play_arrow),
-                    PlaylistIconButtons(Icons.shuffle),
-                    PlaylistIconButtons(Icons.add),
-                    PlaylistIconButtons(Icons.download_outlined),
-                    PlaylistIconButtons(Icons.more_vert),
+                    PlaylistIconButtons(Icons.play_arrow,
+                        const Color.fromARGB(65, 158, 158, 158)),
+                    PlaylistIconButtons(
+                        Icons.shuffle, const Color.fromARGB(65, 158, 158, 158)),
+                    PlaylistIconButtons(
+                        Icons.add, const Color.fromARGB(65, 158, 158, 158)),
+                    PlaylistIconButtons(Icons.download_outlined,
+                        const Color.fromARGB(65, 158, 158, 158)),
+                    PlaylistIconButtons(Icons.more_vert,
+                        const Color.fromARGB(65, 158, 158, 158)),
                     const Spacer(),
                   ],
                 ),

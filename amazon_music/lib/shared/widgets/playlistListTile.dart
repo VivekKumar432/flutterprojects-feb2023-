@@ -1,3 +1,4 @@
+import 'package:amazon_music/features/screens/player.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -75,49 +76,60 @@ class PlaylistListTile extends StatelessWidget {
           controller: scrollController,
           itemCount: songTitles.length,
           itemBuilder: (context, index) {
-            return Card(
-                color: const Color.fromARGB(21, 158, 158, 158),
-                child: ListTile(
-                    leading: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AutoSizeText((index + 1).toString(),
-                            style: const TextStyle(color: Colors.white)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          child: const Image(
-                              image: AssetImage("assets/albumCover.jpg")),
-                        ),
-                      ],
-                    ),
-                    title: AutoSizeText(
-                      songTitles[index],
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    subtitle: AutoSizeText(subtitles[0],
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.white)),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          icons[0],
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Icon(
-                          icons[1],
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )));
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => MyPlayer(
+                              subTitle: subtitles[0],
+                              title: songTitles[index],
+                            )));
+              },
+              child: Card(
+                  color: const Color.fromARGB(21, 158, 158, 158),
+                  child: ListTile(
+                      leading: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AutoSizeText((index + 1).toString(),
+                              style: const TextStyle(color: Colors.white)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            child: const Image(
+                                image: AssetImage("assets/albumCover.jpg")),
+                          ),
+                        ],
+                      ),
+                      title: AutoSizeText(
+                        songTitles[index],
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      subtitle: AutoSizeText(subtitles[0],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(color: Colors.white)),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            icons[0],
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            icons[1],
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ))),
+            );
           }),
     );
   }
