@@ -1,10 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-// import 'package:udemy_clone/screens/coursePage.dart';
-// import 'package:udemy_clone/screens/preHomepages/pageOne.dart';
-// import 'package:udemy_clone/screens/preHomepages/pageThree.dart';
-// import 'package:udemy_clone/screens/preHomepages/pageTwo.dart';
 
 class PrePageView extends StatefulWidget {
   const PrePageView({Key? key}) : super(key: key);
