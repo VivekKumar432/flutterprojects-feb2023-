@@ -1,10 +1,11 @@
+import 'package:amazon_music/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-import 'features/screens/musicFinder.dart';
-
 void main() {
-  runApp(const MaterialApp(home: MyMusicFinder()
-      //MyLibrary()
-      //TrendingPlaylist(),
-      ));
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    routes: getRoutes(),
+    initialRoute: "/",
+    // home: MySplashScreen(),
+  ));
 }

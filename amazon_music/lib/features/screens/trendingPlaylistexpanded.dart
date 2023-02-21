@@ -1,4 +1,4 @@
-import 'package:amazon_music/features/screens/myLibrary.dart';
+import 'package:amazon_music/features/screens/musicFinder.dart';
 import 'package:amazon_music/shared/widgets/playlistListTile.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -54,13 +54,18 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
     );
   }
 
+  List list = [
+    const Text(""),
+    const MyMusicFinder(),
+    const Text(""),
+    const Text(""),
+  ];
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const MyLibrary()));
+      Navigator.push(context, MaterialPageRoute(builder: (_) => list[index]));
     });
   }
 

@@ -68,70 +68,7 @@ class MyMusicFinder extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 3,
                     child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: 2.4,
-                      children: <Widget>[
-                        MyCard(
-                          colorList: const [
-                            Colors.grey,
-                            Colors.blueGrey,
-                          ],
-                          cardMessage: "Love & Heartbreak",
-                        ),
-                        MyCard(
-                          colorList: [
-                            Colors.purple,
-                            Colors.yellow.shade300,
-                          ],
-                          cardMessage: "Be Happy",
-                        ),
-                        MyCard(
-                          colorList: [
-                            Colors.yellow,
-                            Colors.orangeAccent,
-                            Colors.yellow.shade300,
-                          ],
-                          cardMessage: "Party Time",
-                        ),
-                        MyCard(
-                          colorList: const [
-                            Colors.yellow,
-                            Colors.red,
-                            Colors.redAccent,
-                          ],
-                          cardMessage: "Work Out",
-                        ),
-                        MyCard(
-                          colorList: [
-                            Colors.pink,
-                            Colors.deepPurple,
-                            Colors.yellow.shade300,
-                          ],
-                          cardMessage: "Travel",
-                        ),
-                        MyCard(
-                          colorList: const [
-                            Colors.blueGrey,
-                            Colors.grey,
-                          ],
-                          cardMessage: "Chilling out & Lounging",
-                        ),
-                      ],
-                    ),
-                  ),
-                  const AutoSizeText(
-                    "Listen Your Way",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: GridView.count(
+                      primary: false,
                       crossAxisCount: 2,
                       childAspectRatio: 2.4,
                       children: <Widget>[
@@ -207,12 +144,89 @@ class MyMusicFinder extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: GridView.count(
+                      primary: false,
+                      crossAxisCount: 2,
+                      childAspectRatio: 2.4,
+                      children: <Widget>[
+                        MyCard(
+                          colorList: const [
+                            Colors.grey,
+                            Colors.blueGrey,
+                          ],
+                          cardMessage: "Love & Heartbreak",
+                        ),
+                        MyCard(
+                          colorList: [
+                            Colors.purple,
+                            Colors.yellow.shade300,
+                          ],
+                          cardMessage: "Be Happy",
+                        ),
+                        MyCard(
+                          colorList: [
+                            Colors.yellow,
+                            Colors.orangeAccent,
+                            Colors.yellow.shade300,
+                          ],
+                          cardMessage: "Party Time",
+                        ),
+                        MyCard(
+                          colorList: const [
+                            Colors.yellow,
+                            Colors.red,
+                            Colors.redAccent,
+                          ],
+                          cardMessage: "Work Out",
+                        ),
+                        MyCard(
+                          colorList: [
+                            Colors.pink,
+                            Colors.deepPurple,
+                            Colors.yellow.shade300,
+                          ],
+                          cardMessage: "Travel",
+                        ),
+                        MyCard(
+                          colorList: const [
+                            Colors.blueGrey,
+                            Colors.grey,
+                          ],
+                          cardMessage: "Chilling out & Lounging",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: const [
+                      AutoSizeText(
+                        "Moods & Activities",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      Chip(
+                        padding: EdgeInsets.all(2),
+                        label: Text(
+                          "SEE MORE",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color.fromARGB(255, 39, 38, 38),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
+                    height: MediaQuery.of(context).size.height / 3,
                     child: GridView.count(
+                      primary: false,
                       crossAxisCount: 2,
                       childAspectRatio: 2.4,
                       children: <Widget>[
