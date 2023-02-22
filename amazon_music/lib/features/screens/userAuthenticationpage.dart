@@ -317,7 +317,7 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                       Timer(const Duration(seconds: 3), () {
                                         browseLoad = false;
                                         setState(() {});
-                                        Navigator.pushNamed(context, "/fourth");
+                                        Navigator.pushNamed(context, "/third");
                                       });
                                     },
                                     child: browseLoad

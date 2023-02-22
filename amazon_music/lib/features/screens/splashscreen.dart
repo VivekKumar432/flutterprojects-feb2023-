@@ -19,9 +19,10 @@ class _UserSplashState extends State<MySplashScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 2),
-        () => Navigator.pushReplacementNamed(context, "/second"));
+        () => Navigator.pushReplacementNamed(context, "/first"));
 
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
           color: const Color.fromARGB(255, 30, 29, 29),

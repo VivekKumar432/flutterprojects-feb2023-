@@ -1,8 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/widgets/playlistIconButtons.dart';
-
 class MyPlayer extends StatefulWidget {
   String title;
   String subTitle;
@@ -38,10 +36,15 @@ class _MyPlayerState extends State<MyPlayer> {
                   Row(
                     children: <Widget>[
                       IconButton(
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.black,
-                          size: 25,
+                        icon: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.black,
+                            size: 25,
+                          ),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -121,27 +124,32 @@ class _MyPlayerState extends State<MyPlayer> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    color: Colors.white,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: Colors.white,
+                    ),
                   ),
-                  Spacer(),
-                  Icon(
+                  const Spacer(),
+                  const Icon(
                     Icons.cast,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.share,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.more_vert_outlined,
                     color: Colors.white,
                   )
@@ -183,15 +191,16 @@ class _MyPlayerState extends State<MyPlayer> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Spacer(),
-                  PlaylistIconButtons(Icons.star, Colors.transparent),
-                  PlaylistIconButtons(Icons.fast_rewind, Colors.transparent),
-                  PlaylistIconButtons(Icons.play_arrow, Colors.transparent),
-                  PlaylistIconButtons(
-                      Icons.forward_30_rounded, Colors.transparent),
-                  PlaylistIconButtons(Icons.speed, Colors.transparent),
-                  const Spacer(),
+                children: const [
+                  Spacer(),
+                  // Icon(icons),
+                  // PlaylistIconButtons(Icons.star, Colors.transparent),
+                  // PlaylistIconButtons(Icons.fast_rewind, Colors.transparent),
+                  // PlaylistIconButtons(Icons.play_arrow, Colors.transparent),
+                  // PlaylistIconButtons(
+                  //     Icons.forward_30_rounded, Colors.transparent),
+                  // PlaylistIconButtons(Icons.speed, Colors.transparent),
+                  Spacer(),
                 ],
               ),
               const Spacer(),

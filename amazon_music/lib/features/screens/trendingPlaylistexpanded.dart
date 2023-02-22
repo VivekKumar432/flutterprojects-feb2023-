@@ -73,12 +73,17 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           scrolledUnderElevation: 1,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: const Icon(Icons.arrow_back_ios),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back_ios)),
           actions: <Widget>[
             TextButton(
                 onPressed: () {},

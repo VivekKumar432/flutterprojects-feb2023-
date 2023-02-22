@@ -19,8 +19,9 @@ class _UserPageViewState extends State<PrePageView> {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 2),
-        () => Navigator.pushReplacementNamed(context, "/third"));
+        () => Navigator.pushReplacementNamed(context, "/second"));
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
           color: const Color.fromARGB(255, 30, 29, 29),
