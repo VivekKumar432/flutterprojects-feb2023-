@@ -21,6 +21,101 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
 
   int selectedTile = -1;
 
+  Widget text(
+      {required String textMessage,
+      required Color textColor,
+      required double fontSize,
+      required FontWeight fontWeight,
+      int maxLines = 1}) {
+    return AutoSizeText(
+      textMessage,
+      maxLines: maxLines,
+      style: TextStyle(
+          fontFamily: "Ember",
+          color: textColor,
+          fontSize: fontSize,
+          fontWeight: fontWeight),
+    );
+  }
+
+  Widget authTextField() {
+    return TextField(
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(8),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        filled: true,
+        hintStyle: TextStyle(color: Colors.grey[800]),
+        //hintText: "Search music and podcasts",
+        fillColor: const Color.fromARGB(255, 53, 50, 50),
+      ),
+    );
+  }
+
+  Widget authButton({required String buttonLable}) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 18,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                const Color.fromARGB(255, 37, 208, 219)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0),
+            ))),
+        onPressed: () {
+          browseLoad = true;
+          setState(() {});
+          Timer(const Duration(seconds: 3), () {
+            buttonLable = "Please wait";
+            browseLoad = false;
+            setState(() {});
+            Navigator.pushReplacementNamed(context, "/five");
+          });
+        },
+        child: browseLoad
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // AutoSizeText(
+                  //   buttonLable,
+                  //   maxLines: 1,
+                  //   style: const TextStyle(color: Colors.black, fontSize: 17),
+                  // ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 100,
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                        child: LoadingIndicator(
+                            indicatorType: Indicator.ballPulseSync,
+                            colors: [Colors.black],
+                            strokeWidth: 1,
+                            pathBackgroundColor: Colors.black),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 110,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            : AutoSizeText(
+                buttonLable,
+                maxLines: 1,
+                style: const TextStyle(color: Colors.black, fontSize: 17),
+              ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +124,7 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
             child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          color: const Color.fromARGB(255, 30, 29, 29),
+          color: const Color.fromARGB(255, 1, 1, 1),
           child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: SingleChildScrollView(
@@ -47,10 +142,11 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                         ),
                       ],
                     ),
-                    const Text(
-                      "Welcome",
-                      style: TextStyle(color: Colors.white, fontSize: 27),
-                    ),
+                    text(
+                        textMessage: "Welcome",
+                        textColor: Colors.white,
+                        fontSize: 27,
+                        fontWeight: FontWeight.normal),
                     const SizedBox(
                       height: 10,
                     ),
@@ -69,14 +165,11 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                             _radioSelected = value;
                             // print(value); //selected value
                           }),
-                      title: const AutoSizeText(
-                        'Create account. New to Amazon?',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      title: text(
+                          textMessage: "Create account. New to Amazon?",
+                          textColor: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
                       children: <Widget>[
                         Align(
                           alignment: Alignment.centerLeft,
@@ -88,75 +181,39 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "First and last name",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                text(
+                                    textMessage: "First and last name",
+                                    textColor: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(8),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    filled: true,
-                                    hintStyle:
-                                        TextStyle(color: Colors.grey[800]),
-                                    //hintText: "Search music and podcasts",
-                                    fillColor:
-                                        const Color.fromARGB(255, 53, 50, 50),
-                                  ),
-                                ),
-                                const AutoSizeText(
-                                  "Your email address",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                authTextField(),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(8),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    filled: true,
-                                    hintStyle:
-                                        TextStyle(color: Colors.grey[800]),
-                                    //hintText: "Search music and podcasts",
-                                    fillColor:
-                                        const Color.fromARGB(255, 53, 50, 50),
-                                  ),
-                                ),
+                                text(
+                                    textMessage: "Your email address",
+                                    textColor: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const AutoSizeText(
-                                  "Set password",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                authTextField(),
+                                const SizedBox(
+                                  height: 10,
                                 ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(8),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    filled: true,
-                                    fillColor:
-                                        const Color.fromARGB(255, 53, 50, 50),
-                                  ),
+                                text(
+                                    textMessage: "Set password",
+                                    textColor: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                                const SizedBox(
+                                  height: 10,
                                 ),
+                                authTextField(),
                                 const AutoSizeText(
                                   "𝒊 Passwords must be at least 6 character",
                                   style: TextStyle(
@@ -167,29 +224,8 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height / 18,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.cyan),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                        ))),
-                                    onPressed: () {},
-                                    child: const Text(
-                                      "Create your Amazon account",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 17),
-                                    ),
-                                  ),
-                                ),
+                                authButton(
+                                    buttonLable: "Create your Amazon account"),
                                 const SizedBox(
                                   height: 12,
                                 ),
@@ -200,28 +236,33 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                           text:
                                               "By creating an account or logging in, you agree to Amazon's",
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: ' Conditons of Use',
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.blue,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: " and",
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: ' Privacy Policy',
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.blue,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: ".",
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                     ],
                                   ),
                                 ),
@@ -254,6 +295,7 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                         'Sign in. Already a customer?',
                         maxLines: 1,
                         style: TextStyle(
+                            fontFamily: "Ember",
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
@@ -272,6 +314,7 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                 const Text(
                                   "Email or phone number",
                                   style: TextStyle(
+                                      fontFamily: "Ember",
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -279,100 +322,11 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(8),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    filled: true,
-                                    hintStyle:
-                                        TextStyle(color: Colors.grey[800]),
-                                    //hintText: "Search music and podcasts",
-                                    fillColor:
-                                        const Color.fromARGB(255, 53, 50, 50),
-                                  ),
-                                ),
+                                authTextField(),
                                 const SizedBox(
                                   height: 18,
                                 ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height / 18,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.cyan),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                        ))),
-                                    onPressed: () {
-                                      browseLoad = true;
-                                      setState(() {});
-                                      Timer(const Duration(seconds: 3), () {
-                                        browseLoad = false;
-                                        setState(() {});
-                                        Navigator.pushNamed(context, "/third");
-                                      });
-                                    },
-                                    child: browseLoad
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const AutoSizeText(
-                                                "Please wait",
-                                                maxLines: 1,
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 17),
-                                              ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    100,
-                                              ),
-                                              Column(
-                                                children: [
-                                                  const SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 15,
-                                                    child: LoadingIndicator(
-                                                        indicatorType: Indicator
-                                                            .ballPulseSync,
-                                                        colors: [Colors.black],
-                                                        strokeWidth: 1,
-                                                        pathBackgroundColor:
-                                                            Colors.black),
-                                                  ),
-                                                  SizedBox(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            110,
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          )
-                                        : const AutoSizeText(
-                                            "Continue",
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 17),
-                                          ),
-                                  ),
-                                ),
+                                authButton(buttonLable: "Continue"),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -383,28 +337,33 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                           text:
                                               "By continuing, you agree to Amazon's",
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: ' Conditons of Use',
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.blue,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: " and",
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: ' Privacy Notice',
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.blue,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                       TextSpan(
                                           text: ".",
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.white,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                     ],
                                   ),
                                 ),
@@ -417,8 +376,9 @@ class _UserAuthenticationPageState extends State<UserAuthenticationPage> {
                                       TextSpan(
                                           text: 'Need help?',
                                           style: TextStyle(
+                                              fontFamily: "Ember",
                                               color: Colors.blue,
-                                              fontSize: 17)),
+                                              fontSize: 18)),
                                     ],
                                   ),
                                 ),

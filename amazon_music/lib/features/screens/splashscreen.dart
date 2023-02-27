@@ -25,13 +25,13 @@ class _UserSplashState extends State<MySplashScreen> {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
-          color: const Color.fromARGB(255, 30, 29, 29),
+          color: const Color.fromARGB(255, 20, 25, 25),
           child: Padding(
             padding: const EdgeInsets.all(50.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(child: Image.asset("assets/amazonmusiclogowhite.png")),
+                Center(child: Image.asset("assets/amazon_music_logo_GIF.png")),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 35,
                   child: const LoadingIndicator(

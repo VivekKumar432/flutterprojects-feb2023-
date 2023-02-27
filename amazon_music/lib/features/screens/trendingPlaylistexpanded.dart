@@ -8,23 +8,6 @@ import '../../shared/widgets/playlistIconButtons.dart';
 class TrendingPlaylist extends StatefulWidget {
   const TrendingPlaylist({super.key});
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
   @override
   State<TrendingPlaylist> createState() => _TrendingPlaylistState();
 }
@@ -73,7 +56,6 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           scrolledUnderElevation: 1,
@@ -104,44 +86,13 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
                 ),
           ],
         ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(
-              canvasColor: Colors.black,
-              textTheme: Theme.of(context)
-                  .textTheme
-                  .copyWith(bodySmall: const TextStyle(color: Colors.black))),
-          child: BottomNavigationBar(
-            backgroundColor: Colors.black,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search_rounded),
-                label: 'Find',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person_2_outlined),
-                label: 'Library',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.keyboard_voice_outlined),
-                label: 'ALEXA',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.tealAccent,
-            onTap: _onItemTapped,
-          ),
-        ),
         body: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.grey,
+              Theme.of(context).primaryColor,
               Colors.black,
             ],
           )),
@@ -162,47 +113,32 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
                 ),
                 const AutoSizeText(
                   "50 Most Played:",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
                 const AutoSizeText(
                   "India",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 const AutoSizeText(
                   "Curated by Amazon's Music Experts",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 const AutoSizeText(
                   "The most listened to songs in India, updated every Friday.",
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 const AutoSizeText(
                   "50 SONGS . 3 HRS 11 MINS",
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
                 ),
                 const SizedBox(
                   height: 10,
@@ -211,16 +147,21 @@ class _TrendingPlaylistState extends State<TrendingPlaylist> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Spacer(),
-                    PlaylistIconButtons(Icons.play_arrow,
-                        const Color.fromARGB(65, 158, 158, 158)),
                     PlaylistIconButtons(
-                        Icons.shuffle, const Color.fromARGB(65, 158, 158, 158)),
+                      Icons.play_arrow,
+                    ),
                     PlaylistIconButtons(
-                        Icons.add, const Color.fromARGB(65, 158, 158, 158)),
-                    PlaylistIconButtons(Icons.download_outlined,
-                        const Color.fromARGB(65, 158, 158, 158)),
-                    PlaylistIconButtons(Icons.more_vert,
-                        const Color.fromARGB(65, 158, 158, 158)),
+                      Icons.shuffle,
+                    ),
+                    PlaylistIconButtons(
+                      Icons.add,
+                    ),
+                    PlaylistIconButtons(
+                      Icons.download_outlined,
+                    ),
+                    PlaylistIconButtons(
+                      Icons.more_vert,
+                    ),
                     const Spacer(),
                   ],
                 ),

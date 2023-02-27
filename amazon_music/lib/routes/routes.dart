@@ -2,6 +2,7 @@ import 'package:amazon_music/features/screens/userAuthenticationpage.dart';
 import '../features/screens/homepage.dart';
 import '../features/screens/preHomepage.dart';
 import '../features/screens/splashscreen.dart';
+import '../features/screens/bottomNavBar.dart';
 import '../features/screens/trendingPlaylistexpanded.dart';
 
 getRoutes() {
@@ -11,6 +12,8 @@ getRoutes() {
     "/second": (context) => const UserAuthenticationPage(),
     "/third": (context) => const MyHomepage(),
     "/fourth": (context) => const TrendingPlaylist(),
+    "/five": (context) => MyTempScreen(),
+
     // "/gobacktohomepage": (context) => const TrendingPlaylist(),
   };
 }

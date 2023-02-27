@@ -1,5 +1,10 @@
+import 'package:amazon_music/features/screens/myPodcasts.dart';
+import 'package:amazon_music/features/screens/trendingPlaylistexpanded.dart';
+import 'package:amazon_music/shared/constants/deviceDimensions.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
+import '../../shared/constants/dialogue.dart';
 
 class MyHomepage extends StatefulWidget {
   const MyHomepage({super.key});
@@ -9,13 +14,15 @@ class MyHomepage extends StatefulWidget {
 }
 
 class _MyHomepageState extends State<MyHomepage> {
-  _getText(
-      String message, double fontsize, Color fontColor, FontWeight fontWeight) {
+  _getText(String message, double fontsize, FontWeight fontWeight) {
     return AutoSizeText(
       message,
       maxLines: 1,
       style: TextStyle(
-          color: fontColor, fontSize: fontsize, fontWeight: fontWeight),
+          fontFamily: "Ember",
+          //color: fontColor,
+          fontSize: fontsize,
+          fontWeight: fontWeight),
     );
   }
 
@@ -112,22 +119,25 @@ class _MyHomepageState extends State<MyHomepage> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/fourth");
+                // Navigator.pushNamed(context, "/fourth");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const TrendingPlaylist()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width / 2.5,
                   decoration: const BoxDecoration(
-                      // color: Colors.teal,
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: Column(
                     children: [
                       Stack(
                         children: [
                           ClipRRect(
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(15),
+                              Radius.circular(10),
                             ),
                             child: Image(image: AssetImage(albumCovers[index])),
                           ),
@@ -138,8 +148,8 @@ class _MyHomepageState extends State<MyHomepage> {
                               height: MediaQuery.of(context).size.width / 7,
                               decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15)),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
                                 color: Color.fromARGB(222, 33, 149, 243),
                               ),
                               child: Padding(
@@ -147,8 +157,7 @@ class _MyHomepageState extends State<MyHomepage> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    _getText("50", 40, Colors.black,
-                                        FontWeight.bold),
+                                    _getText("50", 40, FontWeight.bold),
                                     const SizedBox(
                                       width: 5,
                                     ),
@@ -156,10 +165,9 @@ class _MyHomepageState extends State<MyHomepage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        _getText("Most Played", 15.5,
-                                            Colors.white, FontWeight.bold),
-                                        _getText("India", 17, Colors.white,
-                                            FontWeight.bold),
+                                        _getText(
+                                            "Most Played", 14, FontWeight.bold),
+                                        _getText("India", 16, FontWeight.bold),
                                       ],
                                     ),
                                   ],
@@ -172,13 +180,12 @@ class _MyHomepageState extends State<MyHomepage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      _getText("50 Most Played: India", 17, Colors.white,
-                          FontWeight.normal),
+                      _getText("50 Most Played: India", 17, FontWeight.normal),
                       _getText(
-                          "Sachin-Jigar, Arijit Singh",
-                          15,
-                          const Color.fromARGB(255, 226, 220, 220),
-                          FontWeight.normal)
+                        "Sachin-Jigar, Arijit Singh",
+                        15,
+                        FontWeight.normal,
+                      )
                     ],
                   ),
                 ),
@@ -188,67 +195,160 @@ class _MyHomepageState extends State<MyHomepage> {
     );
   }
 
+  // void choiceAction(String choice) {
+  //   if (choice == Constants.FirstItem) {
+  //     print('I First Item');
+  //   } else if (choice == Constants.SecondItem) {
+  //     print('I Second Item');
+  //   } else if (choice == Constants.ThirdItem) {
+  //     print('I Third Item');
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: Container(
-          color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
+        elevation: 0,
+        backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          SizedBox(
+            width: DeviceDimensions.deviceHeight(context) / 80,
+          ),
+          Image(
+            image: const AssetImage("assets/notifications.png"),
+            color: Theme.of(context).iconTheme.color,
+            width: DeviceDimensions.deviceHeight(context) / 30,
+          ),
+          const Spacer(),
+          SizedBox(
+              width: 100,
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const TrendingPlaylist()));
+                  },
+                  child: chip("MUSIC"))),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Podcasts()));
+            },
+            child: chip("PODCASTS"),
+          ),
+          const Spacer(),
+          PopupMenuButton<Widget>(
+            position: PopupMenuPosition.under,
+            icon: Image(
+              image: const AssetImage("assets/settings.png"),
+              color: Theme.of(context).iconTheme.color,
+              height: DeviceDimensions.deviceHeight(context) / 30,
+            ),
+            color: const Color.fromARGB(185, 57, 56, 56),
+            itemBuilder: (BuildContext context) {
+              return Constants.choice.map((
+                Widget choice,
+              ) {
+                return PopupMenuItem<Widget>(
+                  value: choice,
+                  child: choice,
+                );
+              }).toList();
+            },
+          ),
+        ],
+      ),
+      extendBodyBehindAppBar: true,
+      //backgroundColor: Theme.of(context).primaryColor,
+      body: SafeArea(
+        child: Container(
+          color: Theme.of(context).primaryColor,
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.only(
+              left: 8,
+              right: 8,
+            ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                      Spacer(),
-                      Chip(
-                        padding: EdgeInsets.all(4),
-                        label: Text(
-                          "MUSIC",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 39, 38, 38),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Chip(
-                        padding: EdgeInsets.all(4),
-                        label: Text(
-                          "PODCASTS",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 39, 38, 38),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
                   const SizedBox(
                     height: 5,
                   ),
                   Row(
                     children: [
-                      _getText("Trending Playlist", 22, Colors.white,
-                          FontWeight.bold),
+                      _getText("Trending Playlists", 22, FontWeight.bold),
+                      const Spacer(),
+                      const Chip(
+                        padding: EdgeInsets.all(5),
+                        label: AutoSizeText(
+                          "SEE MORE",
+                          style: TextStyle(
+                            fontFamily: "Ember",
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color.fromARGB(255, 59, 57, 57),
+                      )
+                    ],
+                  ),
+                  _get(this.context),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      _getText("Start a Podcast Habit", 22, FontWeight.bold),
+                      const Spacer(),
+                      const Chip(
+                        padding: EdgeInsets.all(5),
+                        label: Text(
+                          "SEE MORE",
+                          style: TextStyle(
+                            fontFamily: "Ember",
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color.fromARGB(255, 59, 57, 57),
+                      )
+                    ],
+                  ),
+                  _get(this.context),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      _getText("Shades of love", 22, FontWeight.bold),
+                      const Spacer(),
+                      const Chip(
+                        padding: EdgeInsets.all(5),
+                        label: Text(
+                          "SEE MORE",
+                          style: TextStyle(
+                            fontFamily: "Ember",
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: Color.fromARGB(255, 59, 57, 57),
+                      )
+                    ],
+                  ),
+                  _get(this.context),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      _getText("Shades of love", 22, FontWeight.bold),
                       const Spacer(),
                       const Chip(
                         padding: EdgeInsets.all(5),
@@ -270,14 +370,14 @@ class _MyHomepageState extends State<MyHomepage> {
                   ),
                   Row(
                     children: [
-                      _getText("Start a Podcast Habit", 22, Colors.white,
-                          FontWeight.bold),
+                      _getText("Shades of love", 22, FontWeight.bold),
                       const Spacer(),
                       const Chip(
                         padding: EdgeInsets.all(5),
                         label: Text(
                           "SEE MORE",
                           style: TextStyle(
+                            fontFamily: "Ember",
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -293,14 +393,14 @@ class _MyHomepageState extends State<MyHomepage> {
                   ),
                   Row(
                     children: [
-                      _getText(
-                          "Shades of love", 22, Colors.white, FontWeight.bold),
+                      _getText("Shades of love", 22, FontWeight.bold),
                       const Spacer(),
                       const Chip(
                         padding: EdgeInsets.all(5),
                         label: Text(
                           "SEE MORE",
                           style: TextStyle(
+                            fontFamily: "Ember",
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -316,77 +416,7 @@ class _MyHomepageState extends State<MyHomepage> {
                   ),
                   Row(
                     children: [
-                      _getText(
-                          "Shades of love", 22, Colors.white, FontWeight.bold),
-                      const Spacer(),
-                      const Chip(
-                        padding: EdgeInsets.all(5),
-                        label: Text(
-                          "SEE MORE",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 59, 57, 57),
-                      )
-                    ],
-                  ),
-                  _get(this.context),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      _getText(
-                          "Shades of love", 22, Colors.white, FontWeight.bold),
-                      const Spacer(),
-                      const Chip(
-                        padding: EdgeInsets.all(5),
-                        label: Text(
-                          "SEE MORE",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 59, 57, 57),
-                      )
-                    ],
-                  ),
-                  _get(this.context),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      _getText(
-                          "Shades of love", 22, Colors.white, FontWeight.bold),
-                      const Spacer(),
-                      const Chip(
-                        padding: EdgeInsets.all(5),
-                        label: Text(
-                          "SEE MORE",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 59, 57, 57),
-                      )
-                    ],
-                  ),
-                  _get(this.context),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      _getText(
-                          "Shades of love", 22, Colors.white, FontWeight.bold),
+                      _getText("Shades of love", 22, FontWeight.bold),
                       const Spacer(),
                       const Chip(
                         padding: EdgeInsets.all(5),
@@ -410,5 +440,23 @@ class _MyHomepageState extends State<MyHomepage> {
         ),
       ),
     );
+  }
+
+  Chip chip(String lable) {
+    return Chip(
+        labelPadding:
+            const EdgeInsets.only(left: 10, right: 10, top: -4, bottom: -5),
+        side: BorderSide(
+          color: Theme.of(context).iconTheme.color!,
+        ),
+        label: Text(
+          lable,
+          style: const TextStyle(
+            fontFamily: "Ember",
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Theme.of(context).primaryColor);
   }
 }

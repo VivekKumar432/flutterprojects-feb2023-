@@ -97,10 +97,8 @@ class PlaylistListTile extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            child: const Image(
-                                image: AssetImage("assets/albumCover.jpg")),
-                          ),
+                          const Image(
+                              image: AssetImage("assets/albumCover.jpg")),
                         ],
                       ),
                       title: AutoSizeText(

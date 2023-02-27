@@ -23,16 +23,19 @@ class _MyPlayerState extends State<MyPlayer> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color.fromARGB(255, 197, 180, 30),
-                Colors.orange,
-                Colors.grey,
+                Color.fromARGB(255, 164, 163, 144),
+                Color.fromARGB(255, 58, 50, 38),
+                // Colors.grey,
               ],
             )),
-            height: MediaQuery.of(context).size.height * .60,
+            height: MediaQuery.of(context).size.height * .95,
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 8.0),
               child: Column(
                 children: <Widget>[
+                  const SizedBox(
+                    height: 25,
+                  ),
                   Row(
                     children: <Widget>[
                       IconButton(
@@ -40,9 +43,9 @@ class _MyPlayerState extends State<MyPlayer> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(
+                          child: Icon(
                             Icons.keyboard_arrow_down,
-                            color: Colors.black,
+                            color: Theme.of(context).iconTheme.color,
                             size: 25,
                           ),
                         ),
@@ -51,32 +54,35 @@ class _MyPlayerState extends State<MyPlayer> {
                         },
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.title,
                             style: const TextStyle(
-                                fontSize: 20, color: Colors.black),
+                              fontSize: 20,
+                            ),
                           ),
                           AutoSizeText(
                             widget.subTitle,
                             maxLines: 1,
                             style: const TextStyle(
-                                fontSize: 15, color: Colors.black),
+                              fontSize: 15,
+                            ),
                           ),
                         ],
                       ),
                       const Spacer(),
-                      const Icon(
+                      Icon(
                         Icons.play_arrow,
-                        color: Colors.black,
-                        size: 35,
+                        color: Theme.of(context).iconTheme.color,
+                        size: 40,
                       ),
                       const SizedBox(
                         width: 10,
                       ),
-                      const Icon(
+                      Icon(
                         Icons.forward_30,
-                        color: Colors.black,
+                        color: Theme.of(context).iconTheme.color,
                         size: 30,
                       ),
                       const SizedBox(
@@ -87,13 +93,116 @@ class _MyPlayerState extends State<MyPlayer> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const AutoSizeText(
-                    "In today's episode for 21st Feburary 2023, we narrate a tale of PFAS or forever chemicals adn whetaher we can dump them forever",
-                    maxLines: 3,
-                    style: TextStyle(
-                        fontSize: 30, color: Color.fromARGB(255, 41, 38, 38)),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        Row(children: [
+                          const AutoSizeText(
+                            "From Finshots Daily",
+                            // maxLines: 3,
+                            style: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 18,
+                          )
+                        ]),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const AutoSizeText(
+                          "In today's episode for 21st Feburary 2023, we narrate a tale of PFAS or forever chemicals adn whetaher we can dump them forever",
+                          // maxLines: 3,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
+              ),
+            ),
+          ),
+        ]);
+      },
+    );
+  }
+
+  _playBackcontents(data) {
+    return AutoSizeText(
+      data,
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    );
+  }
+
+  _playbackSpeedSHow(context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext bc) {
+        return Wrap(children: [
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).primaryColor,
+                const Color.fromARGB(255, 58, 50, 38),
+              ],
+            )),
+            height: MediaQuery.of(context).size.height * .95,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15, left: 8.0),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _playBackcontents("Speed of Narration"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("0.5 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("0.8 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("1 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("1.2 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("1.4 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("1.6 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("1.8 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("2 x"),
+                    const Divider(
+                      height: 40,
+                    ),
+                    _playBackcontents("3 x"),
+                  ],
+                ),
               ),
             ),
           ),
@@ -129,29 +238,29 @@ class _MyPlayerState extends State<MyPlayer> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const Icon(
+                    child: Icon(
                       Icons.keyboard_arrow_down_rounded,
-                      color: Colors.white,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                   const Spacer(),
-                  const Icon(
+                  Icon(
                     Icons.cast,
-                    color: Colors.white,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  const Icon(
+                  Icon(
                     Icons.share,
-                    color: Colors.white,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  const Icon(
+                  Icon(
                     Icons.more_vert_outlined,
-                    color: Colors.white,
+                    color: Theme.of(context).iconTheme.color,
                   )
                 ],
               ),
@@ -174,33 +283,59 @@ class _MyPlayerState extends State<MyPlayer> {
               AutoSizeText(
                 widget.title,
                 maxLines: 1,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               AutoSizeText(
                 widget.subTitle,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 100,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  Spacer(),
-                  // Icon(icons),
-                  // PlaylistIconButtons(Icons.star, Colors.transparent),
-                  // PlaylistIconButtons(Icons.fast_rewind, Colors.transparent),
-                  // PlaylistIconButtons(Icons.play_arrow, Colors.transparent),
-                  // PlaylistIconButtons(
-                  //     Icons.forward_30_rounded, Colors.transparent),
-                  // PlaylistIconButtons(Icons.speed, Colors.transparent),
-                  Spacer(),
+                children: [
+                  ImageIcon(
+                    const AssetImage("assets/moon-clear-fill.png"),
+                    size: 20,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                  ImageIcon(
+                    const AssetImage("assets/icons8-backward-10-50.png"),
+                    size: 40,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.width / 6,
+                    width: MediaQuery.of(context).size.width / 6,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromARGB(111, 189, 188, 188),
+                    ),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: 45,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                  ),
+                  ImageIcon(
+                    const AssetImage("assets/icons8-forward-10-50.png"),
+                    size: 40,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _playbackSpeedSHow(context);
+                    },
+                    child: const AutoSizeText(
+                      "1X",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  )
                 ],
               ),
               const Spacer(),
@@ -211,8 +346,7 @@ class _MyPlayerState extends State<MyPlayer> {
                 },
                 child: const AutoSizeText(
                   "About episode",
-                  style: TextStyle(
-                      color: Colors.white, fontStyle: FontStyle.italic),
+                  style: TextStyle(fontStyle: FontStyle.italic),
                 ),
               ))
             ],

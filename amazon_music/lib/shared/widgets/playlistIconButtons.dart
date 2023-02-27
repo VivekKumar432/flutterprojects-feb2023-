@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class PlaylistIconButtons extends StatelessWidget {
   IconData iconName;
-  Color iconBackgroundcolor;
-  PlaylistIconButtons(this.iconName, this.iconBackgroundcolor, {super.key});
+  PlaylistIconButtons(this.iconName, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class PlaylistIconButtons extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(10),
-        backgroundColor: iconBackgroundcolor, // <-- Button color
+        // backgroundColor: , // <-- Button color
         // foregroundColor: Colors.black, // <-- Splash color
       ),
       child: Icon(

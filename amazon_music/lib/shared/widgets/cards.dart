@@ -24,10 +24,9 @@ class MyCard extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: AutoSizeText(
               cardMessage,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ), //declare your widget here
